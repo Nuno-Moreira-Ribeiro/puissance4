@@ -3,11 +3,18 @@ body {
     height: 100vh;
     background-color: whitesmoke;
     overflow: hidden;
+    margin: 0;
+}
+
+.main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
+}
+
+#messageErreur {
+    display: none;
 }
 
 #container {
@@ -92,4 +99,21 @@ body {
     height: 5em;
     background-color: whitesmoke;
     border-radius: 100%;
+}
+
+@media screen and (max-width:900px) {
+    .main {
+        display: none;
+    }
+
+    #erreur {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #messageErreur {
+        display: block;
+    }
 }
