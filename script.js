@@ -133,6 +133,24 @@ function updateColorGrid() {
   }
 }
 
+function isPossible() {
+  let col;
+  for (let index = 0; index < purposeRow.length; index++) {
+    if (purposeRow[index] !== "w") {
+      col = index;
+      break;
+    }
+  }
+  if (currentGrid[col]) {
+    for (let index = currentGrid[col].length - 1; index >= 0; index--) {
+      if (currentGrid[col][index] === "w") {
+        return index;
+      }
+    }
+  }
+  return -1;
+}
+
 function handleKeyPress(event) {
   const key = event.key;
 
@@ -146,11 +164,22 @@ function handleKeyPress(event) {
       updatePurposeRow();
       break;
     case "Enter":
-      updateGrid();
-      updateColorGrid();
-      changePlayer();
-      updateColorPurposeRow();
-      updatePurposeRow();
+      if (isPossible() !== -1) {
+        updateGrid();
+        updateColorGrid();
+        changePlayer();
+        updateColorPurposeRow();
+        updatePurposeRow();
+      }
+      break;
+    case "ArrowDown":
+      if (isPossible() !== -1) {
+        updateGrid();
+        updateColorGrid();
+        changePlayer();
+        updateColorPurposeRow();
+        updatePurposeRow();
+      }
       break;
     default:
       break;
