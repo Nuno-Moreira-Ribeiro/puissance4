@@ -151,45 +151,62 @@ function isPossible() {
   return -1;
 }
 
+function isFull() {
+  for (i = 0; i < currentGrid.length; i++) {
+    for (j = 0; j < currentGrid.length; j++) {
+      console.log(currentGrid[i][j]);
+      if (currentGrid[i][j] === undefined) {
+        console.log(i + " " + j);
+      }
+    }
+  }
+  for (i = 0; i < currentGrid.length; i++) {
+    for (j = 0; j < currentGrid.length; j++) {
+      if (currentGrid[i][j] === "w") {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 function isWin() {
   for (i = 0; i < currentGrid.length; i++) {
     for (j = 0; j < currentGrid.length; j++) {
       c = currentGrid[i][j];
-      if (c !== "w" && c !== undefined) {
-        if (
-          c == currentGrid[i][j + 1] &&
-          c == currentGrid[i][j + 2] &&
-          c == currentGrid[i][j + 3]
-        ) {
-          console.log("1");
-          alert(c + " Gagné!!");
-          return true;
-        } else if (
-          c == currentGrid[i + 1][j + 1] &&
-          c == currentGrid[i + 2][j + 2] &&
-          c == currentGrid[i + 3][j + 3]
-        ) {
-          console.log("2");
-          alert(c + " Gagné!!");
-          return true;
-        } else if (
-          c == currentGrid[i + 1][j] &&
-          c == currentGrid[i + 2][j] &&
-          c == currentGrid[i + 3][j]
-        ) {
-          console.log("3");
-          alert(c + " Gagné!!");
-          return true;
-        } else if (
-          c == currentGrid[i + 1][j - 1] &&
-          c == currentGrid[i + 2][j - 2] &&
-          c == currentGrid[i + 3][j - 3]
-        ) {
-          console.log("4");
-          alert(c + " Gagné!!");
-          return true;
+      try {
+        if (c !== "w" && c !== undefined) {
+          if (
+            c == currentGrid[i][j + 1] &&
+            c == currentGrid[i][j + 2] &&
+            c == currentGrid[i][j + 3]
+          ) {
+            alert(c + " Gagné!!");
+            return true;
+          } else if (
+            c == currentGrid[i + 1][j + 1] &&
+            c == currentGrid[i + 2][j + 2] &&
+            c == currentGrid[i + 3][j + 3]
+          ) {
+            alert(c + " Gagné!!");
+            return true;
+          } else if (
+            c == currentGrid[i + 1][j] &&
+            c == currentGrid[i + 2][j] &&
+            c == currentGrid[i + 3][j]
+          ) {
+            alert(c + " Gagné!!");
+            return true;
+          } else if (
+            c == currentGrid[i + 1][j - 1] &&
+            c == currentGrid[i + 2][j - 2] &&
+            c == currentGrid[i + 3][j - 3]
+          ) {
+            alert(c + " Gagné!!");
+            return true;
+          }
         }
-      }
+      } catch (error) {}
     }
   }
   return false;
@@ -213,7 +230,7 @@ function handleKeyPress(event) {
         changePlayer();
         updateColorPurposeRow();
         updatePurposeRow();
-        if (isWin() == true) {
+        if (isWin() == true || isFull() == true) {
           location.reload();
         }
       }
@@ -225,7 +242,7 @@ function handleKeyPress(event) {
         changePlayer();
         updateColorPurposeRow();
         updatePurposeRow();
-        if (isWin() == true) {
+        if (isWin() == true || isFull() == true) {
           location.reload();
         }
       }
