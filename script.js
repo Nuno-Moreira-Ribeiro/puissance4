@@ -151,9 +151,52 @@ function isPossible() {
   return -1;
 }
 
+function isWin() {
+  for (i = 0; i < currentGrid.length; i++) {
+    for (j = 0; j < currentGrid.length; j++) {
+      c = currentGrid[i][j];
+      if (c !== "w" && c !== undefined) {
+        if (
+          c == currentGrid[i][j + 1] &&
+          c == currentGrid[i][j + 2] &&
+          c == currentGrid[i][j + 3]
+        ) {
+          console.log("1");
+          alert(c + " Gagné!!");
+          return true;
+        } else if (
+          c == currentGrid[i + 1][j + 1] &&
+          c == currentGrid[i + 2][j + 2] &&
+          c == currentGrid[i + 3][j + 3]
+        ) {
+          console.log("2");
+          alert(c + " Gagné!!");
+          return true;
+        } else if (
+          c == currentGrid[i + 1][j] &&
+          c == currentGrid[i + 2][j] &&
+          c == currentGrid[i + 3][j]
+        ) {
+          console.log("3");
+          alert(c + " Gagné!!");
+          return true;
+        } else if (
+          c == currentGrid[i + 1][j - 1] &&
+          c == currentGrid[i + 2][j - 2] &&
+          c == currentGrid[i + 3][j - 3]
+        ) {
+          console.log("4");
+          alert(c + " Gagné!!");
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
 function handleKeyPress(event) {
   const key = event.key;
-
   switch (key) {
     case "ArrowLeft":
       movePurposeToLeft();
@@ -170,6 +213,9 @@ function handleKeyPress(event) {
         changePlayer();
         updateColorPurposeRow();
         updatePurposeRow();
+        if (isWin() == true) {
+          location.reload();
+        }
       }
       break;
     case "ArrowDown":
@@ -179,6 +225,9 @@ function handleKeyPress(event) {
         changePlayer();
         updateColorPurposeRow();
         updatePurposeRow();
+        if (isWin() == true) {
+          location.reload();
+        }
       }
       break;
     default:
